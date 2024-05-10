@@ -1,0 +1,37 @@
+syntax = "proto3" ;
+
+option go_package = "github.com/wansanjou/project-test" ;
+
+message Task {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string date = 4;  
+  string image = 5;
+  StatusTask status = 6;
+}
+
+enum StatusTask {
+  IN_PROGRESS = 0;
+  COMPLETED = 1;
+}
+
+message TaskReq {
+  string id = 1 ;
+}
+
+message TaskArr {
+  repeated Task data = 1 ;
+}
+
+service TaskService {
+  rpc ListTasks(stream TaskReq) returns (TaskArr) {}
+  rpc GetTaskByID(stream TaskReq) returns (Task) {}
+  rpc CreateTask (stream TaskReq) returns (Task){}
+  rpc UpdateTask (stream TaskReq) returns (Task){}
+}
+
+
+
+
+
